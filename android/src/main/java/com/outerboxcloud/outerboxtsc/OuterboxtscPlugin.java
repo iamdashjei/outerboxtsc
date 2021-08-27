@@ -39,33 +39,12 @@ public class OuterboxtscPlugin implements FlutterPlugin, MethodCallHandler {
       String lot = call.argument("lot");
       String product = call.argument("product");
       String number = call.argument("number");
-      //String purchaseUom = call.argument("purchaseUom");
-      //String uom = call.argument("uom");
-      //String uomQty = call.argument("uomQty");
-      //String printedName = call.argument("printedName");
-     // String done = call.argument("done");
-      //String poNum = call.argument("origin");
-      //String vendor = call.argument("contact");
-      // String expiryDate = call.argument("expiryDate");
       String currentDate = call.argument("currentDate");
-     // String location = call.argument("location");
-      // String staffId = call.argument("staffId");
-     // String productCode = call.argument("productCode");
-
-      //int num = Integer.parseInt(number);
-//      String uomString;
-//      if(uom == purchaseUom) {
-//        uomString = done + " " + uom;
-//      } else {
-//        uomString = uomQty + " " + printedName + " " + "(" + done + " " + uom + ")";
-//      }
-//      String poString = poNum;
-      //String expString = "EXP: " + expiryDate;
 
       tscEthernetRunner.openport(ipAddress,9100, 50);
       tscEthernetRunner.setup(61, 38, 4, 1, 0, 3, 0);
       tscEthernetRunner.clearbuffer();
-     // tscEthernetRunner.sendcommand("DIRECTION 0\n");
+      tscEthernetRunner.sendcommand("DIRECTION 0\n");
     //  tscEthernetRunner.sendcommand("SET COUNTER @1 1\n");
 //      if (num < 10) {
 //        tscEthernetRunner.sendcommand("@1 = \"1\"\n");
@@ -76,19 +55,11 @@ public class OuterboxtscPlugin implements FlutterPlugin, MethodCallHandler {
 //      }
       tscEthernetRunner.barcode(16, 0, "128", 46, 2, 0, 2, 2,lot);
       tscEthernetRunner.printerfont(328, 8, "3", 0, 1, 1, "Outerbox");
-//      tscEthernetRunner.printerfont(552, 16, "3", 0, 1, 1, staffId);
       tscEthernetRunner.printerfont(14, 80, "2", 0, 1, 1, product);
-     // tscEthernetRunner.printerfont(328, 80, "2", 0, 1, 1, vendor);
-      //tscEthernetRunner.printerfont(14, 104, "2", 0, 1, 1, uomString);
-    //  tscEthernetRunner.printerfont(328, 104, "2", 0, 1, 1, poString);
-      //tscEthernetRunner.printerfont(14, 128, "2", 0, 1, 1, expString);
       tscEthernetRunner.printerfont(328, 128, "2", 0, 1, 1, currentDate);
       tscEthernetRunner.sendcommand("TEXT 42,160,\"3\",0,1,1,@1\n");
-    //  tscEthernetRunner.printerfont(96, 160, "2", 0, 1, 1, "of");
       tscEthernetRunner.printerfont(128, 160, "3", 0, 1, 1, number);
-      //tscEthernetRunner.printerfont(228, 160, "4", 0, 1, 1, "INBOUND");
-      //tscEthernetRunner.printerfont(462, 160, "3", 0, 1, 1, location);
-    //  tscEthernetRunner.printlabel(num, 1);
+      tscEthernetRunner.printlabel(1, 1);
       tscEthernetRunner.closeport();
       result.success("Success Printing");
     } else {
